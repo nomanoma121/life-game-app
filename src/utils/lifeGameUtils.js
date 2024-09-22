@@ -23,14 +23,14 @@ export function getNextCellsArray(array) {
   const newArray = array.map((row, rowIndex) =>
     row.map((isAlive, colIndex) => {
       const tempAroundCells = [
-        array[rowIndex + 1][colIndex],
-        array[rowIndex - 1][colIndex],
+        array[rowIndex + 1]?.[colIndex],
+        array[rowIndex - 1]?.[colIndex],
         array[rowIndex][colIndex + 1],
         array[rowIndex][colIndex - 1],
-        array[rowIndex + 1][colIndex + 1],
-        array[rowIndex - 1][colIndex + 1],
-        array[rowIndex + 1][colIndex - 1],
-        array[rowIndex - 1][colIndex - 1],
+        array[rowIndex + 1]?.[colIndex + 1],
+        array[rowIndex - 1]?.[colIndex + 1],
+        array[rowIndex + 1]?.[colIndex - 1],
+        array[rowIndex - 1]?.[colIndex - 1],
       ];
       const aroundCells = tempAroundCells.map((e) => (e === undefined ? false: e));
       const count = aroundCells.filter(e => e === true).length;

@@ -15,18 +15,38 @@ function Table() {
   );
 
   function generateInitialState() {
+    setSimulating(false);
+    setStep(0);
     const [newArray, aliveCellsCount] = makeRandomAlive(percentage, tableSize);
     setCellsArray(newArray);
     setAlive(aliveCellsCount);
   }
 
- function handleSimulate() {
-  setInterval(() => {
-    setCellsArray(getNextCellsArray(cellsArray));
-  }, 1000);
- }
-  
+  function clear() {
+    setSimulating(false);
+    setCellsArray(Array.from({ length: tableSize }, () => Array(tableSize).fill(false)));
+    setStep(0);
+    setAlive(0);
+  }
 
+  useEffect(() => {
+    let intervalId;
+    if (simulating) {
+      intervalId = setInterval(() => {
+        setCellsArray(prevCellsArray => {
+          const nextCellsArray = getNextCellsArray(prevCellsArray);
+          setStep(prevStep => prevStep + 1);
+          setAlive(nextCellsArray.flat().filter(cell => cell).length);
+          return nextCellsArray;
+        });
+      }, 100);
+    }
+    return () => clearInterval(intervalId);
+  }, [simulating]);
+
+  const handleSimulate = () => {
+    setSimulating(prev => !prev);
+  };
 
   return (
     <>
@@ -47,19 +67,18 @@ function Table() {
         )}
       </div>
       <div>
-        <Button onClick={handleSimulate}>Simulate</Button>
-        <Button onClick={() => generateInitialState()}>Generate</Button>
+        <Button onClick={handleSimulate}>{simulating ? "Stop" : "Simulate"}</Button>
+        <Button onClick={generateInitialState}>Generate</Button>
         <Input
           type="number"
-          defaultValue={25}
           value={percentage}
           onChange={(e) => setPercentage(Number(e.target.value))}
-          inputProps={{min: 0, max: 100}}
-          style={{width: "45px"}}
+          inputProps={{ min: 0, max: 100 }}
+          style={{ width: "45px" }}
         />
         <span>%</span>
-        <p>Step: {step} Alive: {alive} Dead: {50*50 - alive}</p>
-
+        <Button onClick={() => clear()}>Clear</Button>
+        <p>Step: {step} Alive: {alive} Dead: {tableSize * tableSize - alive}</p>
       </div>
     </>
   );
