@@ -324,53 +324,66 @@ export function generatePatern() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ]
   
-  const gliderGun = tempGliderGun.map((e) => {
-    if(e === 0){
-      return false;
-    } else {
-      return true;
-    }
-  });
+  const gliderGun = tempGliderGun.map(row => 
+    row.map(e => {
+      if(e === 0){
+        return false;
+      } else {
+        return true;
+      }
+    })
+  );
 
-  const galaxy = tempGalaxy.map((e) => {
-    if(e === 0){
-      return false;
-    } else {
-      return true;
-    }
-  });
+  const galaxy = tempGalaxy.map(row => 
+    row.map(e => {
+      if(e === 0){
+        return false;
+      } else {
+        return true;
+      }
+    })
+  );
 
-  const pentadecathlon = tempPentadecathlon.map((e) => {
-    if(e === 0){
-      return false;
-    } else {
-      return true;
-    }
-  });
+  const acorn = tempAcorn.map(row => 
+    row.map(e => {
+      if(e === 0){
+        return false;
+      } else {
+        return true;
+      }
+    })
+  );
 
-  const acorn = tempAcorn.map((e) => {
-    if(e === 0){
-      return false;
-    } else {
-      return true;
-    }
-  });
+  const pufferTrain = tempPufferTrain.map(row => 
+    row.map(e => {
+      if(e === 0){
+        return false;
+      } else {
+        return true;
+      }
+    })
+  );
 
-  const pufferTrain = tempPentadecathlon.map((e) => {
-    if(e === 0){
-      return false;
-    } else {
-      return true;
-    }
-  });
+  const pentadecathlon = tempPentadecathlon.map(row => 
+    row.map(e => {
+      if(e === 0){
+        return false;
+      } else {
+        return true;
+      }
+    })
+  );
 
-  const spaceShip = tempSpaceShip.map((e) => {
-    if(e === 0){
-      return false;
-    } else {
-      return true;
-    }
-  });
+  const spaceShip = tempSpaceShip.map(row => 
+    row.map(e => {
+      if(e === 0){
+        return false;
+      } else {
+        return true;
+      }
+    })
+  );
+
 
   return [galaxy, gliderGun, spaceShip, pufferTrain, acorn, pentadecathlon];
 }

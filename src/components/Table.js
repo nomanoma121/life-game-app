@@ -9,7 +9,8 @@ import BackspaceIcon from "@mui/icons-material/Backspace";
 import BackspaceOutlinedIcon from "@mui/icons-material/BackspaceOutlined";
 import { IconButton } from "@mui/material";
 
-function Table() {
+function Table({ props }) {
+  const [isFirstRender, setIsFirstRender] = useState(true);
   const tableSize = 50;
   const [percentage, setPercentage] = useState(25);
   const [step, setStep] = useState(0);
@@ -95,6 +96,14 @@ function Table() {
     setIsWriteMode(false);
   };
 
+  useEffect(() => {
+    if (isFirstRender) {
+      setIsFirstRender(false);
+      return;
+    }
+    setCellsArray(props);
+  }, [props]);
+
   return (
     <>
       <div
@@ -122,7 +131,7 @@ function Table() {
           ))
         )}
       </div>
-      <div style={{ display: "flex", height: "20px", marginLeft: "50px"}}>
+      <div style={{ display: "flex", height: "20px", marginLeft: "50px" }}>
         <Button onClick={handleSimulate}>
           {simulating ? "Stop" : "Simulate"}
         </Button>
@@ -137,7 +146,7 @@ function Table() {
         <div>%</div>
         <Button onClick={() => clear()}>Clear</Button>
         <div>
-          Step: {step} Alive: {alive} Dead: {tableSize * tableSize - alive}
+          Step: {step} Alive : {alive} Dead : {tableSize * tableSize - alive}
         </div>
         <IconButton onClick={handleWriteClick} style={{ marginLeft: "30px" }}>
           {isWriteMode ? <DrawIcon /> : <DrawOutlinedIcon />}

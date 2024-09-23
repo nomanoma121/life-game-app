@@ -1,34 +1,36 @@
 import React from "react";
 import { List, ListItem, ListItemText, Button } from "@mui/material";
+import { generatePatern } from "../utils/patern";
 
-function PaternList() {
+function PaternList({passing}) {
+  const [galaxy, gliderGun, spaceShip, pufferTrain, acorn, pentadecathlon] = generatePatern();
   return (
     <div>
       <h4>以下面白い形集</h4>
       <List>
         <ListItem>
           <ListItemText primary="グライダー銃" />
-          <Button>セルに反映</Button>
+          <Button onClick={() => passing(gliderGun)}>セルに反映</Button>
         </ListItem>
         <ListItem>
           <ListItemText primary="銀河" />
-          <Button>セルに反映</Button>
+          <Button onClick={() => passing(galaxy)}>セルに反映</Button>
         </ListItem>
         <ListItem>
           <ListItemText primary="ペンタデカスロン" />
-          <Button>セルに反映</Button>
+          <Button onClick={() => passing(pentadecathlon)}>セルに反映</Button>
         </ListItem>
         <ListItem>
           <ListItemText primary="シュシュポッポ列車" />
-          <Button>セルに反映</Button>
+          <Button onClick={() => passing(pufferTrain)}>セルに反映</Button>
         </ListItem>
         <ListItem>
           <ListItemText primary="宇宙船" />
-          <Button>セルに反映</Button>
+          <Button onClick={() => passing(spaceShip)}>セルに反映</Button>
         </ListItem>
         <ListItem>
           <ListItemText primary="長寿型（どんぐり）" />
-          <Button>セルに反映</Button>
+          <Button onClick={() => passing(acorn)}>セルに反映</Button>
         </ListItem>
       </List>
     </div>
