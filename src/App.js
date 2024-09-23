@@ -1,7 +1,7 @@
-import "./App.css";
 import Table from "./components/Table";
 import PaternList from "./components/PaternList";
 import { useState } from "react";
+import { BlockPicker } from "react-color";
 
 function App() {
   const [props, setProps] = useState([[]]);
@@ -50,6 +50,9 @@ function App() {
             <span style={{ fontWeight: "bold" }}>補足</span>:
             Generateボタンを押すことでランダムにAliveセルを生成することもできますが、ペンアイコンやバックスペースアイコンを押すことでセルに直接書いたり消したりもできます。たまにクリックを押していない状態でも反応してしまうことがありますが、もう一度押すことで元に戻せます。
           </p>
+          <a href="https://github.com/nomanoma121/life-game-app" target="_blank" rel="noreferrer noopener" style={{display: "block", width: "100%"}}>
+            コード→https://github.com/nomanoma121/life-game-app
+          </a>
         </div>
       </div>
     </>

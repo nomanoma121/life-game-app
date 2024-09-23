@@ -20,7 +20,7 @@ function Table({ props }) {
   const [isDragging, setIsDragging] = useState(false);
   const [isWriteMode, setIsWriteMode] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
-  const [aliveColor, setAliveColor] = useState("#7AFB7A");
+  const [aliveColor, setAliveColor] = useState("black");
   const [deadColor, setDeadColor] = useState("white");
   const [cellsArray, setCellsArray] = useState(
     Array.from({ length: tableSize }, () => Array(tableSize).fill(false))
