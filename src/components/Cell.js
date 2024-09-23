@@ -1,6 +1,6 @@
 import React from "react";
 
-function Cell({ isAlive, rowIndex, colIndex, changeCell, isDragging }) {
+function Cell({ isAlive, rowIndex, colIndex, changeCell, isDragging, aliveColor, deadColor }) {
   const handleMouseOver = () => {
     if (isDragging) {
       changeCell(rowIndex, colIndex);
@@ -16,7 +16,7 @@ function Cell({ isAlive, rowIndex, colIndex, changeCell, isDragging }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: isAlive ? "green" : "white",
+        backgroundColor: isAlive ? aliveColor : deadColor,
       }}
     ></div>
   );

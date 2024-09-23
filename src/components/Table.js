@@ -8,6 +8,7 @@ import DrawIcon from "@mui/icons-material/Draw";
 import BackspaceIcon from "@mui/icons-material/Backspace";
 import BackspaceOutlinedIcon from "@mui/icons-material/BackspaceOutlined";
 import { IconButton } from "@mui/material";
+import ColorPalette from "./ColorPalette";
 
 function Table({ props }) {
   const [isFirstRender, setIsFirstRender] = useState(true);
@@ -19,6 +20,8 @@ function Table({ props }) {
   const [isDragging, setIsDragging] = useState(false);
   const [isWriteMode, setIsWriteMode] = useState(false);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
+  const [aliveColor, setAliveColor] = useState("#7AFB7A");
+  const [deadColor, setDeadColor] = useState("white");
   const [cellsArray, setCellsArray] = useState(
     Array.from({ length: tableSize }, () => Array(tableSize).fill(false))
   );
@@ -104,6 +107,14 @@ function Table({ props }) {
     setCellsArray(props);
   }, [props]);
 
+  function changeColor(isAlive, color) {
+    if(isAlive){
+      setAliveColor(color);
+    } else {
+      setDeadColor(color);
+    }
+  }
+
   return (
     <>
       <div
@@ -126,12 +137,14 @@ function Table({ props }) {
               colIndex={colIndex}
               changeCell={changeCell}
               isDragging={isDragging}
+              aliveColor={aliveColor}
+              deadColor={deadColor}
               key={`${rowIndex}-${colIndex}`}
             />
           ))
         )}
       </div>
-      <div style={{ display: "flex", height: "20px", marginLeft: "50px" }}>
+      <div style={{ display: "flex", height: "25px", marginLeft: "50px" }}>
         <Button onClick={handleSimulate}>
           {simulating ? "Stop" : "Simulate"}
         </Button>
@@ -145,8 +158,8 @@ function Table({ props }) {
         />
         <div>%</div>
         <Button onClick={() => clear()}>Clear</Button>
-        <div>
-          Step: {step} Alive : {alive} Dead : {tableSize * tableSize - alive}
+        <div style={{display: "flex"}}>
+          Step: {step} Alive<ColorPalette changeColor={changeColor} isAlive={true} color={aliveColor}/>: {alive} Dead<ColorPalette changeColor={changeColor} isAlive={false} color={deadColor}/>: {tableSize * tableSize - alive}
         </div>
         <IconButton onClick={handleWriteClick} style={{ marginLeft: "30px" }}>
           {isWriteMode ? <DrawIcon /> : <DrawOutlinedIcon />}
